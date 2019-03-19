@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "pages/index/main"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "usingComponents": {
+    "i-row": "/static/iview/dist/row/index",
+    "i-col": "/static/iview/dist/col/index",
+    "i-icon": "/static/iview/dist/icon/index",
+    "van-icon": "/static/vant-weapp/dist/icon/index"
+  }
+}
