@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/index/main",
-    "pages/goods_list/main"
+    "pages/goods_list/main",
+    "pages/goods_details/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -13,6 +14,7 @@
     "i-row": "/static/iview/dist/row/index",
     "i-col": "/static/iview/dist/col/index",
     "i-icon": "/static/iview/dist/icon/index",
+    "i-button": "/static/iview/dist/button/index",
     "van-icon": "/static/vant-weapp/dist/icon/index",
     "van-search": "/static/vant-weapp/dist/search/index"
   }

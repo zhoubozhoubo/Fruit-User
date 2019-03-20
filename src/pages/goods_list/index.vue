@@ -5,7 +5,7 @@
         <img mode="widthFix" class="goods_banner" src="../../../static/images/banner@2x.png"/>
       </i-col>
     </i-row>
-    <i-row i-class="search">
+    <i-row i-class="search" :class="{menu_fixed: store_designer}">
       <i-col span="24">
         <van-search background="#FFFFFF"
           :value="searchValue"
@@ -17,9 +17,9 @@
         </van-search>
       </i-col>
     </i-row>
-    <i-row i-class="goods_list">
+    <i-row i-class="goods_list" id="store_designer">
       <i-col span="22" offset="1" i-class="item">
-        <img src="../../../static/images/banner@2x.png"/>
+        <img src="../../../static/images/banner@2x.png" @click="goodsDetails"/>
         <i-icon type="add" size="30"/>
         <h2 class="name">商品名称</h2>
         <h3 class="describe">商品描述商品描述商品描述商品描述</h3>
@@ -103,7 +103,8 @@
     data () {
       return {
         // 搜索关键字
-        searchValue: ''
+        searchValue: '',
+        store_designer: false
       }
     },
 
@@ -113,16 +114,40 @@
       // 搜索
       onSearch () {
         console.log('onSearch')
+      },
+      // 跳转商品列详情
+      goodsDetails () {
+        wx.navigateTo({
+          url: '../goods_details/main'
+        })
       }
     },
 
     created () {
+    },
+    onPageScroll: function (e) {
+      let that = this
+      // 驻店匠人吸顶
+      let storequery = wx.createSelectorQuery()
+      storequery.select('#store_designer').boundingClientRect()
+      storequery.exec(function (storeres) {
+        if (storeres[0].top < 54) {
+          that.store_designer = true
+        } else {
+          that.store_designer = false
+        }
+      })
     }
   }
 </script>
 
 <style scoped>
-
+  .menu_fixed{
+    width:100%;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+  }
 </style>
 
 <style>
