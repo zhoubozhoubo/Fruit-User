@@ -1,17 +1,19 @@
 {
   "pages": [
-    "pages/index/main"
+    "pages/index/main",
+    "pages/goods_list/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#19be6b",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
   },
   "usingComponents": {
     "i-row": "/static/iview/dist/row/index",
     "i-col": "/static/iview/dist/col/index",
     "i-icon": "/static/iview/dist/icon/index",
-    "van-icon": "/static/vant-weapp/dist/icon/index"
+    "van-icon": "/static/vant-weapp/dist/icon/index",
+    "van-search": "/static/vant-weapp/dist/search/index"
   }
 }

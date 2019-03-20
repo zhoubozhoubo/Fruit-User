@@ -9,4 +9,7 @@ export default {
   .container {
     background-color: #f8f8f9;
   }
+  .clear{
+    clear: both;
+  }
 </style>

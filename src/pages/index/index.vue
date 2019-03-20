@@ -1,73 +1,75 @@
 <template>
   <div class="container">
-    <i-row>
-      <i-col span="24">
-        <img mode="widthFix" class="goods_banner" src="../../../static/images/banner@2x.png"/>
-      </i-col>
-    </i-row>
+    <swiper class="index_swiper"
+      :indicator-dots="swiper.indicatorDots"
+      :autoplay="swiper.autoplay"
+      :interval="swiper.interval"
+      :duration="swiper.duration"
+      :indicator-color="swiper.indicatorColor"
+      :indicator-active-color="swiper.indicatorActiveColor"
+    >
+      <block v-for="(banner, bannerIndex) in swiper.bannerList" :key="bannerIndex">
+        <swiper-item>
+          <img mode="widthFix" :src="banner.img"/>
+        </swiper-item>
+      </block>
+    </swiper>
     <i-row i-class="goods_type_list">
-      <i-col span="6" i-class="item">
-        <img src="../../../static/images/goods_type.png"/>
-        <p>剪发</p>
+      <i-col span="12" i-class="item" @click="goodsList">
+        <img src="../../../static/images/banner@2x.png"/>
       </i-col>
-      <i-col span="6" i-class="item">
-        <img src="../../../static/images/goods_type.png"/>
-        <p>剪发</p>
-      </i-col>
-      <i-col span="6" i-class="item">
-        <img src="../../../static/images/goods_type.png"/>
-        <p>剪发</p>
-      </i-col>
-      <i-col span="6" i-class="item">
-        <img src="../../../static/images/goods_type.png"/>
-        <p>剪发</p>
+      <i-col span="12" i-class="item">
+        <img src="../../../static/images/banner@2x.png"/>
       </i-col>
     </i-row>
     <i-row>
       <i-col span="22" offset="1" i-class="goods_today_recommend">
         <h1>
           <i-icon type="collection_fill" size="20" color="#ff9900"/>
-          今日推荐
+          今日特价
         </h1>
       </i-col>
     </i-row>
     <i-row i-class="goods_list">
-      <i-col span="22" offset="1" i-class="item">
+      <i-col span="8" i-class="item">
         <img src="../../../static/images/banner@2x.png"/>
-        <i-icon type="add" size="30"/>
-        <h2 class="name">商品名称</h2>
-        <h3 class="describe">商品描述商品描述商品描述商品描述</h3>
-        <p>
+        <div class="content">
+          <p class="name">商品名称</p>
+          <p class="number">已销售1000</p>
           <span class="money">￥2.00</span>
-          <span class="original_money">￥2.00</span>
-        </p>
-        <span class="number">已销售1000</span>
+          <span class="buy">购买</span>
+          <p class="clear"></p>
+        </div>
       </i-col>
-    </i-row>
-    <i-row i-class="goods_list">
-      <i-col span="22" offset="1" i-class="item">
+      <i-col span="8" i-class="item">
         <img src="../../../static/images/banner@2x.png"/>
-        <i-icon type="add" size="30"/>
-        <h2 class="name">商品名称</h2>
-        <h3 class="describe">商品描述商品描述商品描述商品描述</h3>
-        <p>
+        <div class="content">
+          <p class="name">商品名称</p>
+          <p class="number">已销售1000</p>
           <span class="money">￥2.00</span>
-          <span class="original_money">￥2.00</span>
-        </p>
-        <span class="number">已销售1000</span>
+          <span class="buy">购买</span>
+          <p class="clear"></p>
+        </div>
       </i-col>
-    </i-row>
-    <i-row i-class="goods_list">
-      <i-col span="22" offset="1" i-class="item">
+      <i-col span="8" i-class="item">
         <img src="../../../static/images/banner@2x.png"/>
-        <i-icon type="add" size="30"/>
-        <h2 class="name">商品名称</h2>
-        <h3 class="describe">商品描述商品描述商品描述商品描述</h3>
-        <p>
+        <div class="content">
+          <p class="name">商品名称</p>
+          <p class="number">已销售1000</p>
           <span class="money">￥2.00</span>
-          <span class="original_money">￥2.00</span>
-        </p>
-        <span class="number">已销售1000</span>
+          <span class="buy">购买</span>
+          <p class="clear"></p>
+        </div>
+      </i-col>
+      <i-col span="8" i-class="item">
+        <img src="../../../static/images/banner@2x.png"/>
+        <div class="content">
+          <p class="name">商品名称</p>
+          <p class="number">已销售1000</p>
+          <span class="money">￥2.00</span>
+          <span class="buy">购买</span>
+          <p class="clear"></p>
+        </div>
       </i-col>
     </i-row>
   </div>
@@ -76,12 +78,47 @@
 <script>
   export default {
     data () {
-      return {}
+      return {
+        // 轮播图配置
+        swiper: {
+          // 指示点
+          indicatorDots: true,
+          // 自动播放
+          autoplay: true,
+          // 切换时间间隔
+          interval: 3000,
+          // 动画时长
+          duration: 1000,
+          // 指示点颜色
+          indicatorColor: 'rgba(255, 255, 255, 0.3)',
+          // 当前选中的指示点颜色
+          indicatorActiveColor: '#FFFFFF',
+          // 轮播图片列表
+          bannerList: [
+            {
+              img: '/static/images/banner@2x.png'
+            },
+            {
+              img: '/static/images/banner@2x.png'
+            },
+            {
+              img: '/static/images/banner@2x.png'
+            }
+          ]
+        }
+      }
     },
 
     components: {},
 
-    methods: {},
+    methods: {
+      // 跳转商品列表
+      goodsList () {
+        wx.navigateTo({
+          url: '../goods_list/main'
+        })
+      }
+    },
 
     created () {
     }
@@ -89,13 +126,15 @@
 </script>
 
 <style scoped>
+  .index_swiper{
+    height: 180px;
+  }
+  .index_swiper img{
+    width: 100%;
+  }
 </style>
 
 <style>
-  .goods_banner {
-    width: 100%;
-    float: left;
-  }
 
   .goods_type_list {
     background-color: #FFFFFF;
@@ -103,17 +142,13 @@
 
   .goods_type_list .item {
     margin: 10px 0;
-    text-align: center;
+    padding: 0 10px;
   }
 
   .goods_type_list .item > img {
-    width: 50px;
+    width: 100%;
     height: 50px;
-  }
-
-  .goods_type_list .item > p {
-    font-size: 14px;
-    color: #1c2438;
+    border-radius: 8px;
   }
 
   .goods_today_recommend > h1 {
@@ -130,65 +165,50 @@
   }
 
   .goods_list {
-    margin-bottom: 10px;
-    padding: 10px 0;
-    background-color: #FFFFFF;
+    padding: 0 0 10px;
   }
 
   .goods_list .item {
-    position: relative;
+    margin-bottom: 10px;
+    padding: 0 5px;
   }
 
   .goods_list .item > img {
-    width: 100px;
+    width: 100%;
     height: 100px;
-    float: left;
-    margin-right: 10px;
+    display: block;
+    margin: 0 auto;
   }
 
-  .goods_list .item > i-icon {
-    float: right;
-    margin-left: 10px;
-    line-height: 100px;
-    color: #19be6b;
+  .goods_list .item > .content {
+    padding: 4px 8px 8px;
+    background-color: #FFFFFF;
   }
 
-  .goods_list .item > .name {
-    font-size: 16px;
-    font-weight: normal;
+  .goods_list .item > .content > .name {
+    font-size: 14px;
     color: #1c2438;
   }
 
-  .goods_list .item > .describe {
-    font-size: 14px;
-    font-weight: normal;
+  .goods_list .item > .content > .number {
+    font-size: 10px;
+    line-height: 25px;
     color: #495060;
   }
 
-  .goods_list .item > p {
-    position: absolute;
-    bottom: 0;
-    margin-left: 110px;
-  }
-
-  .goods_list .item > p > .money {
-    font-size: 18px;
+  .goods_list .item > .content > .money {
+    float: left;
+    font-size: 14px;
     color: #ed3f14;
   }
 
-  .goods_list .item > p > .original_money {
-    margin-left: 10px;
-    font-size: 14px;
-    color: #495060;
-    text-decoration: line-through;
+  .goods_list .item > .content > .buy {
+    float: right;
+    padding: 0 4px;
+    border: 1px solid #ed3f14;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #ed3f14;
   }
 
-  .goods_list .item > .number {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    margin-right: 10px;
-    font-size: 14px;
-    color: #1c2438;
-  }
 </style>
