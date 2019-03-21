@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/main",
     "pages/goods_list/main",
-    "pages/goods_details/main"
+    "pages/goods_details/main",
+    "pages/bag/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -10,12 +11,27 @@
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "white"
   },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/main",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/bag/main",
+        "text": "购物袋"
+      }
+    ]
+  },
   "usingComponents": {
     "i-row": "/static/iview/dist/row/index",
     "i-col": "/static/iview/dist/col/index",
     "i-icon": "/static/iview/dist/icon/index",
     "i-button": "/static/iview/dist/button/index",
+    "i-modal": "/static/iview/dist/modal/index",
+    "i-toast": "/static/iview/dist/toast/index",
     "van-icon": "/static/vant-weapp/dist/icon/index",
-    "van-search": "/static/vant-weapp/dist/search/index"
+    "van-search": "/static/vant-weapp/dist/search/index",
+    "van-stepper": "/static/vant-weapp/dist/stepper/index"
   }
 }

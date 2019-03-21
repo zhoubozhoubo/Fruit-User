@@ -6,7 +6,7 @@
       </i-col>
     </i-row>
     <i-row i-class="goods_info">
-      <i-col span="22" offset="1">
+      <i-col span="22" offset="1" i-class="info">
         <p class="name">商品名称</p>
         <p class="describe">商品描述商品描述商品描述商品描述商品描述</p>
         <span class="money">￥24.00</span>
@@ -64,42 +64,51 @@ export default {
   }
 </style>
 <style>
-  .goods_info{
+  .goods_info .info{
+    margin-top: -30px;
+    padding: 8px 10px 0;
+    border-radius: 5px;
     background-color: #FFFFFF;
   }
-  .goods_info span{
+  .goods_info .info > span{
     line-height: 40px;
   }
-  .goods_info .name{
+  .goods_info .info > .name{
     font-size: 16px;
     color: #1c2438;
     line-height: 30px;
   }
-  .goods_info .describe{
+  .goods_info .info > .describe{
     font-size: 14px;
     color: #ff9900;
   }
-  .goods_info .money{
+  .goods_info .info > .money{
     float: left;
     font-size: 20px;
     color: #ed3f14;
   }
-  .goods_info .original_money{
+  .goods_info .info > .original_money{
     float: left;
     margin-left: 10px;
     font-size: 14px;
     color: #495060;
     text-decoration: line-through ;
   }
-  .goods_info .number{
+  .goods_info .info > .number{
     float: right;
     font-size: 16px;
     color: #1c2438;
   }
   .goods_details{
-    margin: 8px 0;
+    margin-top: 8px;
     font-size: 16px;
     background-color: #FFFFFF;
+  }
+  .goods_details p{
+    float:left;
+    margin-top:5px;
+    line-height:30px;
+    border-bottom:2px solid #19be6b;
   }
   .goods_content{
     background-color: #FFFFFF;
