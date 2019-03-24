@@ -3,13 +3,16 @@
     "pages/index/main",
     "pages/goods_list/main",
     "pages/goods_details/main",
-    "pages/bag/main"
+    "pages/bag/main",
+    "pages/user/main",
+    "pages/orders/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#19be6b",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#19be6b"
   },
   "tabBar": {
     "list": [
@@ -20,6 +23,10 @@
       {
         "pagePath": "pages/bag/main",
         "text": "购物袋"
+      },
+      {
+        "pagePath": "pages/user/main",
+        "text": "我的"
       }
     ]
   },
@@ -30,8 +37,16 @@
     "i-button": "/static/iview/dist/button/index",
     "i-modal": "/static/iview/dist/modal/index",
     "i-toast": "/static/iview/dist/toast/index",
+    "i-radio": "/static/iview/dist/radio/index",
+    "i-cell-group": "/static/iview/dist/cell-group/index",
+    "i-cell": "/static/iview/dist/cell/index",
+    "i-tabs": "/static/iview/dist/tabs/index",
+    "i-tab": "/static/iview/dist/tab/index",
     "van-icon": "/static/vant-weapp/dist/icon/index",
     "van-search": "/static/vant-weapp/dist/search/index",
-    "van-stepper": "/static/vant-weapp/dist/stepper/index"
+    "van-stepper": "/static/vant-weapp/dist/stepper/index",
+    "van-radio": "/static/vant-weapp/dist/radio/index",
+    "van-checkbox": "/static/vant-weapp/dist/checkbox/index",
+    "van-checkbox-group": "/static/vant-weapp/dist/checkbox-group/index"
   }
 }
