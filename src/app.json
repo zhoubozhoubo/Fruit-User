@@ -5,7 +5,10 @@
     "pages/goods_details/main",
     "pages/bag/main",
     "pages/user/main",
-    "pages/orders/main"
+    "pages/orders/main",
+    "pages/coupon/main",
+    "pages/address/main",
+    "pages/aoe_address/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -42,11 +45,16 @@
     "i-cell": "/static/iview/dist/cell/index",
     "i-tabs": "/static/iview/dist/tabs/index",
     "i-tab": "/static/iview/dist/tab/index",
+    "i-input": "/static/iview/dist/input/index",
     "van-icon": "/static/vant-weapp/dist/icon/index",
     "van-search": "/static/vant-weapp/dist/search/index",
     "van-stepper": "/static/vant-weapp/dist/stepper/index",
     "van-radio": "/static/vant-weapp/dist/radio/index",
     "van-checkbox": "/static/vant-weapp/dist/checkbox/index",
-    "van-checkbox-group": "/static/vant-weapp/dist/checkbox-group/index"
+    "van-checkbox-group": "/static/vant-weapp/dist/checkbox-group/index",
+    "van-popup": "/static/vant-weapp/dist/popup/index",
+    "van-area": "/static/vant-weapp/dist/area/index",
+    "van-cell": "/static/vant-weapp/dist/cell/index",
+    "van-field": "/static/vant-weapp/dist/field/index"
   }
 }

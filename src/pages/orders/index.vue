@@ -84,14 +84,13 @@
 </template>
 
 <script>
-
 export default {
   data () {
     return {
-      // 搜索栏吸顶
+      // 类型栏吸顶
       typeTop: false,
       // 当前订单类型
-      ordersType: 1,
+      ordersType: 0,
       // 订单类型列表
       ordersTypeList: [
         {
@@ -147,6 +146,9 @@ export default {
   },
 
   created () {
+  },
+  onLoad (option) {
+    this.ordersType = option.ordersType
   },
   onPageScroll: function (e) {
     //  订单类型吸顶

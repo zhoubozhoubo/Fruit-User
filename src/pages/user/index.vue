@@ -18,7 +18,7 @@
         <p class="describe">普通会员</p>-->
       </i-col>
       <i-col span="22" offset="1" i-class="orders">
-        <i-row>
+        <i-row @click="ordersManage(0)">
           <i-col span="7" offset="1" i-class="all_orders">
             <i-icon type="document_fill" size="20" color="#19be6b"/>
             订单中心
@@ -29,19 +29,19 @@
           </i-col>
         </i-row>
         <i-row i-class="orders_manage">
-          <i-col span="6">
+          <i-col span="6" @click="ordersManage(1)">
             <i-icon type="coupons" size="40" color="#19be6b"/>
             <p>待支付</p>
           </i-col>
-          <i-col span="6">
+          <i-col span="6" @click="ordersManage(2)">
             <i-icon type="send" size="40" color="#19be6b"/>
             <p>待配送</p>
           </i-col>
-          <i-col span="6">
+          <i-col span="6" @click="ordersManage(3)">
             <i-icon type="tasklist" size="40" color="#19be6b"/>
             <p>待收货</p>
           </i-col>
-          <i-col span="6">
+          <i-col span="6" @click="ordersManage(4)">
             <i-icon type="success" size="40" color="#19be6b"/>
             <p>已完成</p>
           </i-col>
@@ -51,9 +51,9 @@
     <i-row i-class="menu">
       <i-col span="24">
         <i-cell-group>
-          <i-cell title="我的优惠券" value="2张" is-link></i-cell>
+          <i-cell title="我的优惠券" value="2张" is-link @click="couponManage"></i-cell>
           <i-cell title="邀请好友" is-link></i-cell>
-          <i-cell title="地址管理" is-link></i-cell>
+          <i-cell title="地址管理" is-link @click="addressManage"></i-cell>
           <i-cell title="交易明细" is-link></i-cell>
           <i-cell title="关于我们" is-link></i-cell>
         </i-cell-group>
@@ -74,6 +74,24 @@ export default {
   },
 
   methods: {
+    // 订单中心
+    ordersManage (index) {
+      wx.navigateTo({
+        url: '../orders/main?ordersType=' + index
+      })
+    },
+    // 优惠券
+    couponManage (index) {
+      wx.navigateTo({
+        url: '../coupon/main?couponType=' + index
+      })
+    },
+    // 地址管理
+    addressManage () {
+      wx.navigateTo({
+        url: '../address/main'
+      })
+    }
   },
 
   created () {
