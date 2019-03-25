@@ -1,10 +1,21 @@
 <template>
   <div class="container">
     <i-row i-class="user">
-      <i-col span="18" offset="3" i-class="info">
+      <i-col span="24" i-class="info">
+        <i-row>
+          <i-col span="9">
+            <p class="name">用户名</p>
+          </i-col>
+          <i-col span="6">
+            <img src="../../../static/images/banner@2x.png"/>
+          </i-col>
+          <i-col span="9">
+            <p class="describe">普通会员</p>
+          </i-col>
+        </i-row>
+        <!--<p class="name">用户名</p>
         <img src="../../../static/images/banner@2x.png"/>
-        <p class="name">用户名</p>
-        <p class="describe">普通会员</p>
+        <p class="describe">普通会员</p>-->
       </i-col>
       <i-col span="22" offset="1" i-class="orders">
         <i-row>
@@ -79,23 +90,28 @@ export default {
     background-color: #FFFFFF;
   }
   .user .info{
-    padding: 10px 0;
+    padding: 10px 0 0;
+    margin-bottom: 10px;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    background-color: #19be6b;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 70px;
   }
-  .user .info>img{
+  .user .info img{
     width: 70px;
     height: 70px;
-    border-radius: 35px;
-    float: left;
-    margin-right: 20px;
+    border-radius: 50%;
   }
-  .user .info>.name{
+  .user .info .name{
     font-size: 16px;
-    margin-top: 14px;
-    color: #1c2438;
+    /*margin-top: 14px;*/
+    /*color: #1c2438;*/
   }
-  .user .info>.describe{
+  .user .info .describe{
     font-size: 12px;
-    color: #495060;
+    /*color: #495060;*/
   }
   .orders {
     border-radius: 8px;
