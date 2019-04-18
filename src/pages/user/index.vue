@@ -7,7 +7,7 @@
             <p class="name">用户名</p>
           </i-col>
           <i-col span="6">
-            <img src="../../../static/images/banner@2x.png"/>
+            <img src="../../../static/images/user.png"/>
           </i-col>
           <i-col span="9">
             <p class="describe">普通会员</p>

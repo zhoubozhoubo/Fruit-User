@@ -11,7 +11,7 @@
           <i-col span="2" offset="18" i-class="delete" v-if="editShow" @click="editGoods">
             <p>编辑</p>
           </i-col>
-          <i-col span="2" offset="16" i-class="delete" v-if="!editShow" @click="finishGoods">
+          <i-col span="2" offset="16" i-class="delete" v-if="!editShow" @click="editGoods">
             <p>完成</p>
           </i-col>
           <i-col span="2" i-class="delete" v-if="!editShow">
@@ -96,7 +96,7 @@ export default {
       goodsList: [
         {
           id: 1,
-          img: '/static/images/banner@2x.png',
+          img: '/static/images/yt.jpg',
           name: '商品1',
           describe: '商品描述商品描述商品描述商品描述',
           money: '11.00',
@@ -104,7 +104,7 @@ export default {
         },
         {
           id: 2,
-          img: '/static/images/banner@2x.png',
+          img: '/static/images/pp.jpg',
           name: '商品2',
           describe: '商品描述商品描述商品描述商品描述',
           money: '11.00',
@@ -112,7 +112,7 @@ export default {
         },
         {
           id: 3,
-          img: '/static/images/banner@2x.png',
+          img: '/static/images/yt.jpg',
           name: '商品3',
           describe: '商品描述商品描述商品描述商品描述',
           money: '11.00',
@@ -120,7 +120,7 @@ export default {
         },
         {
           id: 4,
-          img: '/static/images/banner@2x.png',
+          img: '/static/images/pp.jpg',
           name: '商品4',
           describe: '商品描述商品描述商品描述商品描述',
           money: '11.00',
@@ -128,7 +128,7 @@ export default {
         },
         {
           id: 5,
-          img: '/static/images/banner@2x.png',
+          img: '/static/images/yt.jpg',
           name: '商品5',
           describe: '商品描述商品描述商品描述商品描述',
           money: '11.00',
@@ -149,11 +149,7 @@ export default {
   methods: {
     // 编辑
     editGoods () {
-      this.editShow = false
-    },
-    // 完成
-    finishGoods () {
-      this.editShow = true
+      this.editShow = !this.editShow
     },
     // 删除栏吸顶
     delFixed () {
@@ -210,6 +206,10 @@ export default {
           }
         }
       }
+      $Toast({
+        type: 'success',
+        content: '删除成功'
+      })
       this.checkList = []
       this.delModal.visible = false
     },

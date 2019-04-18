@@ -20,14 +20,14 @@
         <p class="status">待付款</p>
       </i-col>
       <i-col span="22" offset="1" i-class="goods">
-        <img src="../../../static/images/banner@2x.png"/>
+        <img src="../../../static/images/yt.jpg"/>
         <p class="name">商品名称</p>
         <p class="describe">商品描述商品描述商品描述商品描述</p>
         <span class="money">￥2.00</span>
         <span class="number">×3</span>
       </i-col>
       <i-col span="22" offset="1" i-class="goods">
-        <img src="../../../static/images/banner@2x.png"/>
+        <img src="../../../static/images/pp.jpg"/>
         <p class="name">商品名称</p>
         <p class="describe">商品描述商品描述商品描述商品描述</p>
         <span class="money">￥2.00</span>
@@ -53,14 +53,14 @@
         <p class="status">待付款</p>
       </i-col>
       <i-col span="22" offset="1" i-class="goods">
-        <img src="../../../static/images/banner@2x.png"/>
+        <img src="../../../static/images/yt.jpg"/>
         <p class="name">商品名称</p>
         <p class="describe">商品描述商品描述商品描述商品描述</p>
         <span class="money">￥2.00</span>
         <span class="number">×3</span>
       </i-col>
       <i-col span="22" offset="1" i-class="goods">
-        <img src="../../../static/images/banner@2x.png"/>
+        <img src="../../../static/images/pp.jpg"/>
         <p class="name">商品名称</p>
         <p class="describe">商品描述商品描述商品描述商品描述</p>
         <span class="money">￥2.00</span>

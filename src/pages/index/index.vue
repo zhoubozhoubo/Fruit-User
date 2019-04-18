@@ -19,20 +19,40 @@
         <img src="../../../static/images/banner@2x.png" @click="hotGoodsList"/>
       </i-col>
       <i-col span="12" i-class="item">
-        <img src="../../../static/images/banner@2x.png"/>
+        <img src="../../../static/images/banner@2x.png" @click="hotGoodsList"/>
       </i-col>
     </i-row>
     <i-row>
       <i-col span="22" offset="1" i-class="goods_today_recommend">
         <h1>
           <i-icon type="collection_fill" size="20" color="#ff9900"/>
-          今日特价
+          热卖推荐
         </h1>
       </i-col>
     </i-row>
     <i-row i-class="goods_list">
       <i-col span="8" i-class="item" v-for="(goods, goodsIndex) in goodsList" :key="goodsIndex">
-        <img :src="goods.img"/>
+        <img :src="goods.img" @click="goodsDetails"/>
+        <div class="content">
+          <p class="name">{{goods.name}}</p>
+          <p class="number">已销售{{goods.number}}</p>
+          <span class="money">￥{{goods.money}}</span>
+          <span class="buy" @click="buy(goodsIndex)">购买</span>
+          <p class="clear"></p>
+        </div>
+      </i-col>
+    </i-row>
+    <i-row>
+      <i-col span="22" offset="1" i-class="goods_today_recommend">
+        <h1>
+          <i-icon type="praise_fill" size="20" color="#ff9900"/>
+          新品上市
+        </h1>
+      </i-col>
+    </i-row>
+    <i-row i-class="goods_list">
+      <i-col span="8" i-class="item" v-for="(goods, goodsIndex) in goodsList" :key="goodsIndex">
+        <img :src="goods.img" @click="goodsDetails"/>
         <div class="content">
           <p class="name">{{goods.name}}</p>
           <p class="number">已销售{{goods.number}}</p>
@@ -98,7 +118,7 @@
               img: '/static/images/banner@2x.png'
             },
             {
-              img: '/static/images/banner@2x.png'
+              img: '/static/images/banner2.jpg'
             },
             {
               img: '/static/images/banner@2x.png'
@@ -109,7 +129,7 @@
         goodsList: [
           {
             id: 1,
-            img: '/static/images/banner@2x.png',
+            img: '/static/images/yt.jpg',
             name: '商品名称1',
             money: '198.00',
             original_money: '148.00',
@@ -117,7 +137,7 @@
           },
           {
             id: 1,
-            img: '/static/images/banner@2x.png',
+            img: '/static/images/pp.jpg',
             name: '商品名称2',
             money: '198.00',
             original_money: '148.00',
@@ -125,7 +145,7 @@
           },
           {
             id: 1,
-            img: '/static/images/banner@2x.png',
+            img: '/static/images/yt.jpg',
             name: '商品名称3',
             money: '198.00',
             original_money: '148.00',
@@ -133,7 +153,7 @@
           },
           {
             id: 1,
-            img: '/static/images/banner@2x.png',
+            img: '/static/images/pp.jpg',
             name: '商品名称4',
             money: '198.00',
             original_money: '148.00',
@@ -141,7 +161,7 @@
           },
           {
             id: 1,
-            img: '/static/images/banner@2x.png',
+            img: '/static/images/yt.jpg',
             name: '商品名称5',
             money: '198.00',
             original_money: '148.00',
@@ -174,6 +194,12 @@
         console.log('hotGoodsList')
         wx.navigateTo({
           url: '../goods_list/main'
+        })
+      },
+      // 跳转商品列详情
+      goodsDetails () {
+        wx.navigateTo({
+          url: '../goods_details/main'
         })
       },
       // 购买对话框

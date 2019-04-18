@@ -2,26 +2,17 @@
   <div class="container">
     <i-row i-class="del">
       <i-col span="22" offset="1">
-        <i-col span="6" i-class="delete">
-          <p><i-icon type="coordinates" size="20" color="#19be6b"/>收货地址</p>
-        </i-col>
-        <i-col span="4" offset="14" i-class="delete" v-if="editShow">
-          <p @click="delShow">删除地址</p>
-        </i-col>
-        <i-col span="2" offset="16" i-class="delete" v-if="!editShow">
-          <p @click="delShow">完成</p>
-        </i-col>
-        <!--<i-col span="2" i-class="delete" v-if="!editShow">
-          <i-icon type="trash" size="30" @click="del"/>
-        </i-col>-->
+          <i-col span="6" i-class="delete">
+            <p><i-icon type="coordinates" size="20" color="#19be6b"/>收货地址</p>
+          </i-col>
       </i-col>
     </i-row>
     <i-row i-class="address_list"
            v-for="(address, addressIndex) in addressList"
-           :key="addressIndex">
+           :key="addressIndex"
+           @click="chooseAddress(addressIndex)">
       <i-col span="22" offset="1" i-class="item">
-        <i-icon type="editor" size="30" color="#19be6b" @click="edit" v-if="editShow"/>
-        <i-icon type="trash" size="30" color="#19be6b" @click="del" v-if="!editShow"/>
+        <i-icon type="success_fill" size="30" color="#19be6b" v-if="chooseIndex === addressIndex"/>
         <p class="contact">{{address.name}}<span class="phone">{{address.phone}}</span></p>
         <p class="address_com">{{address.address_com}}</p>
       </i-col>
@@ -31,21 +22,14 @@
         <i-button long="true" i-class="add_address" @click="addAddress">添加收货地址</i-button>
       </i-col>
     </i-row>
-    <!--删除弹窗-->
-    <i-modal :visible="delModal.visible" @ok="deleteOk" @cancel="deleteCancle">
-      <view style="text-align: center; color: #1c2438; font-size: 16px">确定要删除这条收货地址吗</view>
-    </i-modal>
-    <i-toast id="toast" />
   </div>
 </template>
 
 <script>
-const {$Toast} = require('../../../static/iview/dist/base/index')
+
 export default {
   data () {
     return {
-      // 编辑
-      editShow: true,
       // 地址列表
       addressList: [
         {
@@ -69,11 +53,8 @@ export default {
           address_com: '四川省成都市郫都区红旗大道北段76号'
         }
       ],
-      // 删除弹窗
-      delModal: {
-        visible: false,
-        index: ''
-      }
+      // 选中地址
+      chooseIndex: ''
     }
   },
 
@@ -81,35 +62,12 @@ export default {
   },
 
   methods: {
-    // 显示删除地址
-    delShow () {
-      console.log('delShow')
-      this.editShow = !this.editShow
-    },
-    // 删除
-    del (index) {
-      console.log('del')
-      this.delModal.index = index
-      this.delModal.visible = true
-    },
-    // 确定删除
-    deleteOk () {
-      console.log('deleteOk')
-      $Toast({
-        type: 'success',
-        content: '删除成功'
-      })
-      this.addressList.splice(this.delModal.index, 1)
-      this.delModal.visible = false
-    },
-    // 取消删除
-    deleteCancle () {
-      console.log('deleteCancle')
-      this.delModal.visible = false
+    // 选中收货地址
+    chooseAddress (index) {
+      this.chooseIndex = index
     },
     // 添加收货地址
     addAddress () {
-      console.log('addAddress')
       wx.navigateTo({
         url: '../aoe_address/main'
       })
@@ -138,10 +96,6 @@ export default {
   .del .delete > p > i-icon view{
     float:left;
     line-height:44px;
-  }
-  .del .delete > i-icon view{
-    float: right;
-    line-height: 44px;
   }
   .address_list{
     background-color: #FFFFFF;

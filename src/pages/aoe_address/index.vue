@@ -1,12 +1,26 @@
 <template>
   <div class="container">
-    <i-row>
+    <i-row i-class="address_info">
       <i-col span="24">
+
+        <!--<i-cell title="联系人">
+          <i-input slot="footer" right placeholder="姓名" :value="address.name"/>
+        </i-cell>
+        <i-cell title="联系人" i-class="cell_none">
+          <i-input slot="footer" right placeholder="姓名" :value="address.name"/>
+        </i-cell>
+        <i-cell title="联系电话">
+          <i-input slot="footer" type="number" right placeholder="联系电话" :value="address.phone"/>
+        </i-cell>
+        <i-cell title="联系电话" i-class="cell_none">
+          <i-input slot="footer" type="number" right placeholder="联系电话" :value="address.phone"/>
+        </i-cell>-->
+
         <i-input :value="address.name" title="联系人" autofocus placeholder="姓名"/>
-        <i-input :value="address.phone" type="number" title="联系电话" placeholder="手机号码"/>
-        <i-cell title="地区" is-link @click="showArea"></i-cell>
-        <i-input :value="address.address" placeholder="选择地区"/>
-        <i-cell title="详细地址"></i-cell>
+        <i-input :value="address.phone" type="number" title="联系电话" placeholder="联系电话"/>
+        <i-cell title="收货地址" is-link @click="showArea" :value="address.address"></i-cell>
+        <!--<i-input :value="address.address" placeholder="选择地区"/>-->
+        <!--<i-cell title="详细地址"></i-cell>-->
         <i-input :value="address.address_com" placeholder="请输入详细地址"/>
       </i-col>
     </i-row>
@@ -48,7 +62,7 @@
     <van-popup
       :show="areaShow"
       position="bottom"
-      overlay>
+      @close="closeArea">
       <van-area :area-list="areaList"
                 @cancel="areaCancel"
                 @confirm="areaConfirm"/>
@@ -108,6 +122,11 @@ export default {
       console.log('showArea')
       this.areaShow = true
     },
+    // 关闭地区列表
+    closeArea () {
+      console.log('closeArea')
+      this.areaShow = false
+    },
     // 取消选择地区
     areaCancel () {
       console.log('areaCancel')
@@ -136,6 +155,9 @@ export default {
 
 </style>
 <style>
+  .address_info{
+    color: #495060;
+  }
   .bottom{
     position: fixed;
     width: 100%;

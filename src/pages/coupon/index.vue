@@ -69,7 +69,6 @@
       },
       // 改变选中优惠券类型
       typeChange (res) {
-        console.log(res)
         this.couponType = res.mp.detail.key
       }
     },
