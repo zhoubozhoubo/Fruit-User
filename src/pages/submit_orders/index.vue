@@ -18,35 +18,21 @@
         <p class="name">商品名称</p>
         <p class="describe">商品描述商品描述商品描述商品描述</p>
         <span class="money">￥2.00</span>
-        <span class="number">×3</span>
-        <van-stepper value="4" custom-class="option_number"/>
+        <van-stepper integer disable-input value="4" custom-class="option_number"/>
       </i-col>
       <i-col span="22" offset="1" i-class="goods">
         <img src="../../../static/images/yt.jpg"/>
         <p class="name">商品名称</p>
         <p class="describe">商品描述商品描述商品描述商品描述</p>
         <span class="money">￥2.00</span>
-        <span class="number">×3</span>
-        <van-stepper value="4" custom-class="option_number"/>
+        <van-stepper integer disable-input value="4" custom-class="option_number"/>
       </i-col>
       <i-col span="22" offset="1" i-class="goods">
         <img src="../../../static/images/yt.jpg"/>
         <p class="name">商品名称</p>
         <p class="describe">商品描述商品描述商品描述商品描述</p>
         <span class="money">￥2.00</span>
-        <span class="number">×3</span>
-        <van-stepper value="4" custom-class="option_number"/>
-      </i-col>
-    </i-row>
-    <i-row i-class="coupon">
-      <i-col span="17" offset="1">
-        <p>优惠券</p>
-      </i-col>
-      <i-col span="3">
-        <p>无可用</p>
-      </i-col>
-      <i-col span="1">
-        <i-icon type="more" size="40" color="#19be6b" @click="showCoupon"/>
+        <van-stepper integer disable-input value="4" custom-class="option_number"/>
       </i-col>
     </i-row>
     <i-row i-class="goods_money">
@@ -57,11 +43,22 @@
         <p class="money">￥189.00</p>
       </i-col>
     </i-row>
-    <i-row i-class="pay_way">
-      <i-col span="18" offset="1">
-        <p>支付方式</p>
+    <i-row i-class="coupon">
+      <i-col span="16" offset="1">
+        <p>优惠券</p>
       </i-col>
       <i-col span="4">
+        <p style="text-align: right;">无可用</p>
+      </i-col>
+      <i-col span="1">
+        <i-icon type="more" size="40" color="#19be6b" @click="showCoupon"/>
+      </i-col>
+    </i-row>
+    <i-row i-class="pay_way">
+      <i-col span="17" offset="1">
+        <p>支付方式</p>
+      </i-col>
+      <i-col span="5">
         <p class="wechat_pay">微信支付</p>
       </i-col>
     </i-row>
@@ -167,6 +164,9 @@ export default {
     // 提交订单
     submitOrders () {
       console.log('submitOrders')
+      wx.navigateTo({
+        url: '../orders_details/main'
+      })
     }
   },
 
@@ -238,13 +238,6 @@ export default {
     font-size: 18px;
     color: #ed3f14;
   }
-  .goods_list .goods>.number{
-    position: absolute;
-    bottom: 10px;
-    right: 0;
-    font-size: 14px;
-    color: #495060;
-  }
   .goods_list .goods .option_number{
     position: absolute;
     bottom: 10px;
@@ -294,6 +287,7 @@ export default {
   }
   .pay_way .wechat_pay{
     font-weight: bold;
+    text-align: right;
   }
   .coupon_popup {
     padding: 10px 0;

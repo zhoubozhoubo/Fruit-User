@@ -21,23 +21,23 @@
         </i-row>
       </i-col>
     </i-row>
-    <i-row i-class="goods_list">
+    <i-row i-class="goods_list" v-for="(goods, goodsIndex) in goodsList" :key="goodsIndex">
       <i-col span="22" offset="1" i-class="item">
         <i-row>
           <i-col span="8">
-            <img src="../../../static/images/yt.jpg" @click="goodsDetails"/>
+            <img :src="goods.img" @click="goodsDetails"/>
           </i-col>
           <i-col span="15" offset="1">
             <i-row>
               <i-col span="20" @click="goodsDetails">
                 <i-row>
                   <i-col span="24">
-                    <h2 class="name">商品名称</h2>
+                    <h2 class="name">{{goods.name}}</h2>
                   </i-col>
                 </i-row>
                 <i-row>
                   <i-col span="24">
-                    <h3 class="describe">商品描述商品描述商品描述商品描述</h3>
+                    <h3 class="describe">{{goods.describe}}</h3>
                   </i-col>
                 </i-row>
               </i-col>
@@ -47,130 +47,13 @@
             </i-row>
             <i-row @click="goodsDetails">
               <i-col span="6">
-                <span class="money">￥2.00</span>
+                <span class="money">￥{{goods.money}}</span>
               </i-col>
               <i-col span="5" offset="1">
-                <span class="original_money">￥2.00</span>
+                <span class="original_money">￥{{goods.original_money}}</span>
               </i-col>
               <i-col span="8" offset="4">
-                <span class="number">已销售1000</span>
-              </i-col>
-            </i-row>
-          </i-col>
-        </i-row>
-      </i-col>
-    </i-row>
-    <i-row i-class="goods_list">
-      <i-col span="22" offset="1" i-class="item">
-        <i-row>
-          <i-col span="8">
-            <img src="../../../static/images/yt.jpg" @click="goodsDetails"/>
-          </i-col>
-          <i-col span="15" offset="1">
-            <i-row>
-              <i-col span="20" @click="goodsDetails">
-                <i-row>
-                  <i-col span="24">
-                    <h2 class="name">商品名称</h2>
-                  </i-col>
-                </i-row>
-                <i-row>
-                  <i-col span="24">
-                    <h3 class="describe">商品描述商品描述商品描述商品描述</h3>
-                  </i-col>
-                </i-row>
-              </i-col>
-              <i-col span="3" offset="1">
-                <i-icon type="add" size="30" @click="addBag"/>
-              </i-col>
-            </i-row>
-            <i-row @click="goodsDetails">
-              <i-col span="6">
-                <span class="money">￥2.00</span>
-              </i-col>
-              <i-col span="5" offset="1">
-                <span class="original_money">￥2.00</span>
-              </i-col>
-              <i-col span="8" offset="4">
-                <span class="number">已销售1000</span>
-              </i-col>
-            </i-row>
-          </i-col>
-        </i-row>
-      </i-col>
-    </i-row>
-    <i-row i-class="goods_list">
-      <i-col span="22" offset="1" i-class="item">
-        <i-row>
-          <i-col span="8">
-            <img src="../../../static/images/yt.jpg" @click="goodsDetails"/>
-          </i-col>
-          <i-col span="15" offset="1">
-            <i-row>
-              <i-col span="20" @click="goodsDetails">
-                <i-row>
-                  <i-col span="24">
-                    <h2 class="name">商品名称</h2>
-                  </i-col>
-                </i-row>
-                <i-row>
-                  <i-col span="24">
-                    <h3 class="describe">商品描述商品描述商品描述商品描述</h3>
-                  </i-col>
-                </i-row>
-              </i-col>
-              <i-col span="3" offset="1">
-                <i-icon type="add" size="30" @click="addBag"/>
-              </i-col>
-            </i-row>
-            <i-row @click="goodsDetails">
-              <i-col span="6">
-                <span class="money">￥2.00</span>
-              </i-col>
-              <i-col span="5" offset="1">
-                <span class="original_money">￥2.00</span>
-              </i-col>
-              <i-col span="8" offset="4">
-                <span class="number">已销售1000</span>
-              </i-col>
-            </i-row>
-          </i-col>
-        </i-row>
-      </i-col>
-    </i-row>
-    <i-row i-class="goods_list">
-      <i-col span="22" offset="1" i-class="item">
-        <i-row>
-          <i-col span="7">
-            <img src="../../../static/images/yt.jpg" @click="goodsDetails"/>
-          </i-col>
-          <i-col span="16" offset="1">
-            <i-row>
-              <i-col span="20" @click="goodsDetails">
-                <i-row>
-                  <i-col span="24">
-                    <h2 class="name">商品名称</h2>
-                  </i-col>
-                </i-row>
-                <i-row>
-                  <i-col span="24">
-                    <h3 class="describe">商品描述商品描述商品描述商品描述</h3>
-                  </i-col>
-                </i-row>
-              </i-col>
-              <i-col span="3" offset="1">
-                <i-icon type="add" size="30" @click="addBag"/>
-              </i-col>
-            </i-row>
-            <i-row @click="goodsDetails">
-              <i-col span="6">
-                <span class="money">￥2.00</span>
-              </i-col>
-              <i-col span="5" offset="1">
-                <span class="original_money">￥2.00</span>
-              </i-col>
-              <i-col span="8" offset="4">
-                <span class="number">已销售1000</span>
+                <span class="number">已销售{{goods.number}}</span>
               </i-col>
             </i-row>
           </i-col>
@@ -186,16 +69,35 @@
   export default {
     data () {
       return {
+        // 商品类型id
+        goodsTypeId: '',
         // 搜索关键字
         searchValue: '',
         // 搜索栏吸顶
-        searchTop: false
+        searchTop: false,
+        // 商品列表
+        goodsList: []
       }
     },
 
     components: {},
 
     methods: {
+      // 获取商品列表
+      getGoodsList () {
+        let vm = this
+        wx.request({
+          url: vm.myConfig.GoodsList,
+          method: 'GET',
+          data: {
+            goodsTypeId: vm.goodsTypeId
+          },
+          success (res) {
+            console.log(res)
+            vm.goodsList = res.data.data
+          }
+        })
+      },
       // 搜索栏吸顶
       searchFixed () {
         let that = this
@@ -227,6 +129,11 @@
           url: '../goods_details/main'
         })
       }
+    },
+    onLoad: function (option) {
+      this.goodsTypeId = option.goodsTypeId
+      // 获取商品列表
+      this.getGoodsList()
     },
 
     created () {

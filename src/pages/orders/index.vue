@@ -15,18 +15,18 @@
       </i-col>
     </i-row>
     <i-row i-class="orders_list">
-      <i-col span="22" offset="1" i-class="title">
+      <i-col span="22" offset="1" i-class="title" @click="ordersDetails">
         <p class="number">订单号：1234567890</p>
         <p class="status">待付款</p>
       </i-col>
-      <i-col span="22" offset="1" i-class="goods">
+      <i-col span="22" offset="1" i-class="goods" @click="ordersDetails">
         <img src="../../../static/images/yt.jpg"/>
         <p class="name">商品名称</p>
         <p class="describe">商品描述商品描述商品描述商品描述</p>
         <span class="money">￥2.00</span>
         <span class="number">×3</span>
       </i-col>
-      <i-col span="22" offset="1" i-class="goods">
+      <i-col span="22" offset="1" i-class="goods" @click="ordersDetails">
         <img src="../../../static/images/pp.jpg"/>
         <p class="name">商品名称</p>
         <p class="describe">商品描述商品描述商品描述商品描述</p>
@@ -41,10 +41,10 @@
         </p>
       </i-col>
       <i-col span="5" offset="13" i-class="option">
-        <i-button i-class="cancel_orders" @click="nowBuy">取消订单</i-button>
+        <i-button i-class="cancel_orders" @click="cancelOrders">取消订单</i-button>
       </i-col>
       <i-col span="5" i-class="option">
-        <i-button i-class="pay_orders" @click="nowBuy">立即支付</i-button>
+        <i-button i-class="pay_orders" @click="nowPay">立即支付</i-button>
       </i-col>
     </i-row>
     <i-row i-class="orders_list">
@@ -74,10 +74,10 @@
         </p>
       </i-col>
       <i-col span="5" offset="13" i-class="option">
-        <i-button i-class="cancel_orders" @click="nowBuy">取消订单</i-button>
+        <i-button i-class="cancel_orders" @click="cancelOrders">取消订单</i-button>
       </i-col>
       <i-col span="5" i-class="option">
-        <i-button i-class="pay_orders" @click="nowBuy">立即支付</i-button>
+        <i-button i-class="pay_orders" @click="nowPay">立即支付</i-button>
       </i-col>
     </i-row>
   </div>
@@ -142,6 +142,20 @@ export default {
     typeChange (res) {
       console.log(res)
       this.ordersType = res.mp.detail.key
+    },
+    // 订单详情
+    ordersDetails () {
+      wx.navigateTo({
+        url: '../orders_details/main'
+      })
+    },
+    // 取消订单
+    cancelOrders () {
+      console.log('cancelOrders')
+    },
+    // 立即支付
+    nowPay () {
+      console.log('nowPay')
     }
   },
 

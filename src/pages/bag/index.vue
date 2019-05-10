@@ -46,7 +46,7 @@
               <h2 class="name">{{goods.name}}</h2>
               <h3 class="describe">{{goods.describe}}</h3>
               <span class="money">￥{{goods.money}}</span>
-              <van-stepper :value="goods.number" custom-class="option_number"/>
+              <van-stepper integer disable-input :value="goods.number" custom-class="option_number" @change="changeGoodsNumber"/>
             </i-col>
           </i-row>
         </i-col>
@@ -174,6 +174,10 @@ export default {
       } else {
         this.checkList = []
       }
+    },
+    // 改变商品数量
+    changeGoodsNumber (res) {
+      console.log(res)
     },
     // 选框
     onChange (res) {

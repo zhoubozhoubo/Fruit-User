@@ -15,52 +15,31 @@
       </block>
     </swiper>
     <i-row i-class="goods_type_list">
-      <i-col span="12" i-class="item">
-        <img src="../../../static/images/banner@2x.png" @click="hotGoodsList"/>
-      </i-col>
-      <i-col span="12" i-class="item">
-        <img src="../../../static/images/banner@2x.png" @click="hotGoodsList"/>
+      <i-col span="12" i-class="item" v-for="(goodsType, goodsTypeIndex) in goodsTypeList" :key="goodsTypeIndex">
+        <img :src="goodsType.img" @click="goGoodsList(goodsType.id)"/>
       </i-col>
     </i-row>
-    <i-row>
-      <i-col span="22" offset="1" i-class="goods_today_recommend">
-        <h1>
-          <i-icon type="collection_fill" size="20" color="#ff9900"/>
-          热卖推荐
-        </h1>
-      </i-col>
-    </i-row>
-    <i-row i-class="goods_list">
-      <i-col span="8" i-class="item" v-for="(goods, goodsIndex) in goodsList" :key="goodsIndex">
-        <img :src="goods.img" @click="goodsDetails"/>
-        <div class="content">
-          <p class="name">{{goods.name}}</p>
-          <p class="number">已销售{{goods.number}}</p>
-          <span class="money">￥{{goods.money}}</span>
-          <span class="buy" @click="buy(goodsIndex)">购买</span>
-          <p class="clear"></p>
-        </div>
-      </i-col>
-    </i-row>
-    <i-row>
-      <i-col span="22" offset="1" i-class="goods_today_recommend">
-        <h1>
-          <i-icon type="praise_fill" size="20" color="#ff9900"/>
-          新品上市
-        </h1>
-      </i-col>
-    </i-row>
-    <i-row i-class="goods_list">
-      <i-col span="8" i-class="item" v-for="(goods, goodsIndex) in goodsList" :key="goodsIndex">
-        <img :src="goods.img" @click="goodsDetails"/>
-        <div class="content">
-          <p class="name">{{goods.name}}</p>
-          <p class="number">已销售{{goods.number}}</p>
-          <span class="money">￥{{goods.money}}</span>
-          <span class="buy" @click="buy(goodsIndex)">购买</span>
-          <p class="clear"></p>
-        </div>
-      </i-col>
+    <i-row v-for="(goodsTypeGoods, goodsTypeGoodsIndex) in goodsTypeGoodsList" :key="goodsTypeGoodsIndex">
+      <i-row>
+        <i-col span="22" offset="1" i-class="goods_today_recommend">
+          <h1>
+            <i-icon type="collection_fill" size="20" color="#ff9900"/>
+            {{goodsTypeGoods.name}}
+          </h1>
+        </i-col>
+      </i-row>
+      <i-row i-class="goods_list">
+        <i-col span="8" i-class="item" v-for="(goods, goodsIndex) in goodsTypeGoods.goodsList" :key="goodsIndex">
+          <img :src="goods.img" @click="goodsDetails"/>
+          <div class="content">
+            <p class="name">{{goods.name}}</p>
+            <p class="number">已销售{{goods.number}}</p>
+            <span class="money">￥{{goods.money}}</span>
+            <span class="buy" @click="buy(goodsTypeGoodsIndex, goodsIndex)">购买</span>
+            <p class="clear"></p>
+          </div>
+        </i-col>
+      </i-row>
     </i-row>
     <!--购买弹窗-->
     <i-modal :visible="buyModal.visible" :show-ok="buyModal.showOk" :show-cancel="buyModal.showCancel">
@@ -77,7 +56,7 @@
       <i-row i-class="buy_number">
         <i-col span="22" offset="1">
           数量
-          <van-stepper value="1" custom-class="option_number"/>
+          <van-stepper :value="formItem.number" custom-class="option_number"/>
         </i-col>
       </i-row>
       <i-row i-class="buy_bag">
@@ -125,49 +104,11 @@
             }
           ]
         },
-        // 商品列表
-        goodsList: [
-          {
-            id: 1,
-            img: '/static/images/yt.jpg',
-            name: '商品名称1',
-            money: '198.00',
-            original_money: '148.00',
-            number: '123'
-          },
-          {
-            id: 1,
-            img: '/static/images/pp.jpg',
-            name: '商品名称2',
-            money: '198.00',
-            original_money: '148.00',
-            number: '123'
-          },
-          {
-            id: 1,
-            img: '/static/images/yt.jpg',
-            name: '商品名称3',
-            money: '198.00',
-            original_money: '148.00',
-            number: '123'
-          },
-          {
-            id: 1,
-            img: '/static/images/pp.jpg',
-            name: '商品名称4',
-            money: '198.00',
-            original_money: '148.00',
-            number: '123'
-          },
-          {
-            id: 1,
-            img: '/static/images/yt.jpg',
-            name: '商品名称5',
-            money: '198.00',
-            original_money: '148.00',
-            number: 123
-          }
+        // 商品分类列表
+        goodsTypeList: [
         ],
+        // 推荐商品分类及分类下商品列表
+        goodsTypeGoodsList: [],
         // 购买对话框
         buyModal: {
           visible: false,
@@ -181,7 +122,7 @@
           name: '',
           money: '',
           original_money: '',
-          number: ''
+          number: 1
         }
       }
     },
@@ -189,11 +130,50 @@
     components: {},
 
     methods: {
-      // 跳转热卖商品列表
-      hotGoodsList () {
-        console.log('hotGoodsList')
+      // 获取首页banner列表
+      getBannerList () {
+        let vm = this
+        wx.request({
+          url: vm.myConfig.BannerList,
+          method: 'GET',
+          data: {},
+          success (res) {
+            console.log(res)
+            vm.swiper.bannerList = res.data.data
+          }
+        })
+      },
+      // 获取未推荐商品分类列表
+      getGoodsTypeList () {
+        let vm = this
+        wx.request({
+          url: vm.myConfig.GoodsTypeList,
+          method: 'GET',
+          data: {},
+          success (res) {
+            console.log(res)
+            vm.goodsTypeList = res.data.data
+          }
+        })
+      },
+      // 获取推荐商品分类以及分类下商品列表
+      getGoodsTypeListGoods () {
+        let vm = this
+        wx.request({
+          url: vm.myConfig.GoodsTypeListGoods,
+          method: 'GET',
+          data: {},
+          success (res) {
+            console.log(res)
+            vm.goodsTypeGoodsList = res.data.data
+          }
+        })
+      },
+      // 跳转商品列表
+      goGoodsList (id) {
+        console.log('goGoodsList')
         wx.navigateTo({
-          url: '../goods_list/main'
+          url: '../goods_list/main?goodsTypeId=' + id
         })
       },
       // 跳转商品列详情
@@ -203,14 +183,13 @@
         })
       },
       // 购买对话框
-      buy (index) {
+      buy (typeIndex, index) {
         console.log('buy')
-        this.formItem.id = this.goodsList[index].id
-        this.formItem.img = this.goodsList[index].img
-        this.formItem.name = this.goodsList[index].name
-        this.formItem.money = this.goodsList[index].money
-        this.formItem.original_money = this.goodsList[index].original_money
-        this.formItem.number = this.goodsList[index].number
+        this.formItem.id = this.goodsTypeGoodsList[typeIndex].goodsList[index].id
+        this.formItem.img = this.goodsTypeGoodsList[typeIndex].goodsList[index].img
+        this.formItem.name = this.goodsTypeGoodsList[typeIndex].goodsList[index].name
+        this.formItem.money = this.goodsTypeGoodsList[typeIndex].goodsList[index].money
+        this.formItem.original_money = this.goodsTypeGoodsList[typeIndex].goodsList[index].original_money
         this.buyModal.visible = true
       },
       // 添加到购物袋
@@ -231,6 +210,14 @@
           content: '购买成功'
         })
       }
+    },
+    onLoad () {
+      // 获取首页banner列表
+      this.getBannerList()
+      // 获取未推荐商品分类列表
+      this.getGoodsTypeList()
+      // 获取推荐商品分类以及分类下商品列表
+      this.getGoodsTypeListGoods()
     },
 
     created () {
@@ -278,7 +265,7 @@
   }
 
   .goods_list {
-    padding: 0 0 10px;
+    /*padding: 0 0 10px;*/
   }
 
   .goods_list .item {

@@ -22,11 +22,15 @@
       <i-col span="22" offset="1" i-class="item">
         <i-icon type="editor" size="30" color="#19be6b" @click="edit" v-if="editShow"/>
         <i-icon type="trash" size="30" color="#19be6b" @click="del" v-if="!editShow"/>
-        <p class="contact">{{address.name}}<span class="phone">{{address.phone}}</span></p>
+        <p class="contact">{{address.name}}<span class="phone">{{address.phone}}</span>
+          <i-tag class="i-tags" name="默认" color="green" v-if="address.is_default === 1">
+            默认
+          </i-tag>
+        </p>
         <p class="address_com">{{address.address_com}}</p>
       </i-col>
     </i-row>
-    <i-row i-class="bottom">
+    <i-row i-class="bottom" v-if="editShow">
       <i-col span="24">
         <i-button long="true" i-class="add_address" @click="addAddress">添加收货地址</i-button>
       </i-col>
@@ -51,22 +55,26 @@ export default {
         {
           name: '周波1',
           phone: '18328607281',
-          address_com: '四川省成都市郫都区红旗大道北段76号'
+          address_com: '四川省成都市郫都区红旗大道北段76号',
+          is_default: 1
         },
         {
           name: '周波2',
           phone: '18328607281',
-          address_com: '四川省成都市郫都区红旗大道北段76号'
+          address_com: '四川省成都市郫都区红旗大道北段76号',
+          is_default: 0
         },
         {
           name: '周波3',
           phone: '18328607281',
-          address_com: '四川省成都市郫都区红旗大道北段76号'
+          address_com: '四川省成都市郫都区红旗大道北段76号',
+          is_default: 0
         },
         {
           name: '周波4',
           phone: '18328607281',
-          address_com: '四川省成都市郫都区红旗大道北段76号'
+          address_com: '四川省成都市郫都区红旗大道北段76号',
+          is_default: 0
         }
       ],
       // 删除弹窗
@@ -85,6 +93,13 @@ export default {
     delShow () {
       console.log('delShow')
       this.editShow = !this.editShow
+    },
+    // 编辑
+    edit () {
+      console.log('edit')
+      wx.navigateTo({
+        url: '../aoe_address/main'
+      })
     },
     // 删除
     del (index) {
@@ -165,10 +180,14 @@ export default {
   }
   .address_list .item>.contact>.phone{
     margin-left: 10px;
+    margin-right: 10px;
     padding-left: 10px;
     border-left: 1px solid #495060;
     color: #1c2438;
     font-weight: 500;
+  }
+  .address_list .item>.contact .default_tag{
+    color: #19be6b;
   }
   .address_list .item>.address_com{
     font-size: 14px;

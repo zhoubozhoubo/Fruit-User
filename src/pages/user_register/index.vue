@@ -16,14 +16,12 @@
           <i-input slot="footer" type="number" right placeholder="联系电话" :value="address.phone"/>
         </i-cell>-->
 
-        <i-input :value="address.name" title="联系人" autofocus placeholder="姓名"/>
-        <i-input :value="address.phone" type="number" title="联系电话" placeholder="联系电话"/>
-        <i-cell title="收货地址" is-link @click="showArea" :value="address.address"></i-cell>
+        <i-input :value="name" title="姓名" placeholder="姓名"/>
+        <i-input :value="phone" type="number" title="电话" placeholder="电话"/>
+        <i-cell title="地址" is-link @click="showArea" :value="address"></i-cell>
         <!--<i-input :value="address.address" placeholder="选择地区"/>-->
         <!--<i-cell title="详细地址"></i-cell>-->
-        <i-input :value="address.address_com" placeholder="请输入详细地址"/>
-        <i-radio color="#19be6b" value="设为默认地址" :position="radioPosition" :checked="address.is_default === 1" @change="changeDefault">
-        </i-radio>
+        <i-input :value="address_com" placeholder="请输入详细地址"/>
       </i-col>
     </i-row>
     <!--<i-row>
@@ -58,7 +56,7 @@
     </i-row>-->
     <i-row i-class="bottom">
       <i-col span="24">
-        <i-button long="true" i-class="save_address" @click="saveAddress">保存收货地址</i-button>
+        <i-button long="true" i-class="save_info" @click="saveInfo">保存信息</i-button>
       </i-col>
     </i-row>
     <!--地区选择弹窗-->
@@ -70,24 +68,21 @@
                 @cancel="areaCancel"
                 @confirm="areaConfirm"/>
     </van-popup>
+    <i-toast id="toast" />
   </div>
 </template>
 
 <script>
-
+const {$Toast} = require('../../../static/iview/dist/base/index')
 export default {
   data () {
     return {
-      // 地址信息
-      address: {
-        name: '',
-        phone: '',
-        address: '',
-        address_com: '',
-        is_default: 0
-      },
-      // 单选框右侧显示
-      radioPosition: 'right',
+      name: '',
+      phone: '',
+      nickName: '',
+      avatarUrl: '',
+      address: '',
+      address_com: '',
       // 地区列表显示
       areaShow: false,
       // 地区列表
@@ -141,22 +136,45 @@ export default {
       console.log('areaConfirm')
       this.areaShow = false
     },
-    // 改变默认
-    changeDefault () {
-      console.log(this.address.is_default)
-      if (this.address.is_default === 1) {
-        this.address.is_default = 0
-      } else if (this.address.is_default === 0) {
-        this.address.is_default = 1
-      }
-    },
-    // 保存收货地址
-    saveAddress () {
-      console.log('saveAddress')
-      wx.navigateBack({
-        delta: 1
+    // 保存信息
+    saveInfo () {
+      let vm = this
+      $Toast({
+        type: 'loading',
+        content: '加载中'
       })
+      let thirdSession = wx.getStorageSync('third_Session')
+      wx.request({
+        url: vm.myConfig.LoginPerfect,
+        method: 'POST',
+        data: {
+          third_Session: thirdSession,
+          name: vm.name,
+          phone: vm.phone,
+          nickName: vm.nickName,
+          avatarUrl: vm.avatarUrl,
+          address: vm.address,
+          address_com: vm.address_com
+        },
+        success: function (res) {
+          console.log(res)
+          if (res.data.code === 1) {
+            wx.switchTab({
+              url: '../index/main'
+            })
+          }
+        }
+      })
+      // wx.navigateBack({
+      //   delta: 1
+      // })
     }
+  },
+
+  onLoad () {
+    let userInfo = wx.getStorageSync('userInfo')
+    this.nickName = userInfo.nickName
+    this.avatarUrl = userInfo.avatarUrl
   },
 
   created () {
@@ -177,7 +195,7 @@ export default {
     bottom: 0;
     z-index: 1;
   }
-  .bottom .save_address{
+  .bottom .save_info{
     font-size:18px;
     color: #FFFFFF!important;
     background-color: #19be6b!important;
